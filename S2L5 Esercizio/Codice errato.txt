@@ -1,0 +1,79 @@
+#include <stdio.h>
+
+void menu ();
+void moltiplica ();
+void dividi ();
+void ins_string ();
+
+
+int main () 
+
+{
+	char scelta = {'\0'};               // Le parentesi graffe non sono necessarie
+	menu ();
+	scanf ("%d", &scelta);              // 1) Essendo la variabile "scelta" specificata come char, l'input utente deve essere definito come "%c"
+
+	switch (scelta)
+	{
+		case 'A':                  // 2) A questa instruzione switch manca l'opzione per contemplare possibili input errati da parte dell'utente,
+		moltiplica();              //    come l'inserimento di un carattere non previsto nel loop (ad esempio, nel precedente "scanf ()" l'utente
+		break;                     //    potrebbe digitare "D" e ciò romprebbe immediatamente il programma). Potremmo ovviare al problema anticipando
+		case 'B':                  //    a tutto questo codice un ciclo while.
+                dividi();
+                break;                     
+		case 'C':                   
+                ins_string();              
+                break;
+	}
+
+return 0;
+
+}
+
+
+void menu ()
+{
+	printf ("Benvenuto, sono un assitente digitale, posso aiutarti a sbrigare alcuni compiti\n");
+	printf ("Come posso aiutarti?\n");
+	printf ("A >> Moltiplicare due numeri\n B >> Dividere due numeri\n C >> Inserire una stringa\n");
+
+}
+
+
+void moltiplica ()
+{
+	short int  a,b = 0;                                                // 3) Vengono dichiarati contemporaneamente due tipi di variabili, quando ne serve sono uno (o short o int); 
+	printf ("Inserisci i due numeri da moltiplicare:");                //    usiamo int in quanto prevede un numero maggiore di variabili (4 byte invece dei 2 di short).
+	scanf ("%f", &a);                                                  //    Avendo precedentemente dichiarato che la variabile "a" è un int, la sintassi corretta è "%d".
+	scanf ("%d", &b);
+
+	short int prodotto = a * b;                                        //    Come prima, definiamo la variabile usando solo int.
+
+	printf ("Il prodotto tra %d e %d e': %d", a,b,prodotto);
+}
+
+
+void dividi ()
+{                                                                          // 4) Qui abbiamo una divisione, non viene però presa in considerazione la possibilità che l'utente inserica 
+        int  a,b = 0;                                                      //    "0" come denominatore. Anche in questo caso, possiamo risolvere il problema con un while permettendo 
+        printf ("Inserisci il numeratore:");                               //     così all' utente di reinserire i dati.
+        scanf ("%d", &a);
+	printf ("Inserisci il denumeratore:");
+        scanf ("%d", &b);
+
+        int divisione = a % b;                                             // 5) Essendo una divisione, conviene usare float invece di int. Inoltre l'operatore corretto è "/".
+
+        printf ("La divisione tra %d e %d e': %d", a,b,divisione);
+}
+
+
+
+
+
+void ins_string ()                                               // 6) La seguente funzione permette all'utente di inserire una stringa in input senza però restituire alcun risultato.
+{                                                                //   Potremmo ad esempio inserire una funzione di stampa alla fine per mostrare all'utente ciò che ha scritto:
+	char stringa[10];                                        
+        printf ("Inserisci la stringa:");                        // 7) Infine, nella definizione della variabile stringa viene specificato che questa deve avere una lunghezza massima  
+        scanf ("%s", &stringa);                                  //    di 10 caratteri; possiamo assicurare ciò inserenso un limite all'input dell'utente inserendo "%10s% invece di
+}                                                                //    "%s" nella funzione "scanf()"
+

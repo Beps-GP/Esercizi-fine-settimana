@@ -1,0 +1,91 @@
+#include <stdio.h>
+
+void menu();
+void moltiplica();
+void dividi();
+void ins_string();
+
+
+int main () {
+    
+    char scelta = '\0';
+    menu ();
+    scanf(" %c", &scelta);
+    
+    while (scelta != 'A' && scelta!= 'B' && scelta != 'C') {
+        
+        printf("Scelta non valida, inserire un' opzione tra A, B o C. \n");
+        menu();
+        scanf(" %c", &scelta);
+    }
+    
+    switch (scelta) {
+        
+        case 'A':
+        moltiplica();
+        break;
+        
+        case 'B':
+        dividi();
+        break;
+        
+        case 'C':
+        ins_string();
+        break;
+    }
+    
+    return 0;
+    
+}
+
+void menu() {
+    
+    printf ("Benvenuto, sono un assitente digitale, posso aiutarti a sbrigare alcuni compiti \n");
+    printf ("Come posso aiutarti? \n");
+    printf ("A >> Moltiplicare due numeri \nB >> Dividere due numeri \nC >> Inserire una stringa \n");
+    
+}
+
+
+void moltiplica() {
+    
+    int a = 0;
+    int b = 0;
+    printf("Inserisci i due numeri da moltiplicare: \n");
+    scanf(" %d", &a);
+    scanf(" %d", &b);
+    
+    int prodotto = a * b;      // Potremmo usare long se prevediamo che il risultato sia un numero molto grande.
+    
+    printf("Il prodotto tra %d e %d e': %d", a, b, prodotto);    // Se precedentemente abbiamo usato long, inseriamo %l al posto dell' ultimo %d.
+}
+
+void dividi() {
+    
+    int a, b = 0;
+    
+    printf("Inserisci il numeratore: \n");
+    scanf(" %d", &a);
+    printf("Insericsci il denominatore: \n");
+    scanf(" %d", &b);
+    
+    while (b == 0) {
+        
+        printf("Il denominatore non può essere 0, inserire un nuovo valore: \n");
+        scanf(" %d", &b);
+    }
+    
+    float divisione = (float)a / b;
+    
+    printf("La divisione tra %d e %d e': %f \n", a, b, divisione);
+    
+}
+
+void ins_string() {
+    
+    char stringa[11];
+    printf("Inserisci la stringa: \n");
+    scanf(" %10s \n", stringa);
+    printf("Hai inserito la stringa: %s", stringa);
+    
+}
